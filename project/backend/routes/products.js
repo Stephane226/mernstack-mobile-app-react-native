@@ -1,3 +1,4 @@
+const { Category } = require('../models/category');
 const {Product} = require('../models/product');
 const express = require('express');
 const router = express.Router();
@@ -11,21 +12,37 @@ router.get(`/`, async (req, res) =>{
     res.send(productList);
 })
 
-router.post(`/`, (req, res) =>{
+router.post(`/:id`,async (req, res) =>{
+
+    //first check if there is a valid category
+    const category = Category.findById(req.body.category);
+    if(!category){
+        res.status(400).send('invalid category')
+    }
+
     const product = new Product({
         name: req.body.name,
         image: req.body.image,
-        countInStock: req.body.countInStock
+        description: req.body.description,
+        richDescription: req.body.richDescription,
+        brand: req.body.brand,
+        price: req.body.price,
+        category: req.body.category,
+        countInStock: req.body.countInStock,
+        rating: req.body.rating,
+        numReviews: req.body.numReviews,
+        isFeatured: req.body.isFeatured,
+        dateCreated: req.body.dateCreated,
+
     })
 
-    product.save().then((createdProduct=> {
-        res.status(201).json(createdProduct)
-    })).catch((err)=>{
-        res.status(500).json({
-            error: err,
-            success: false
-        })
-    })
+   const productSave  = await product.save()
+
+    if(!productSave){
+       return res.status(500).send('product not created')
+    }else{
+        res.status(200).send(productSave)
+    }
 })
 
 module.exports =router;
