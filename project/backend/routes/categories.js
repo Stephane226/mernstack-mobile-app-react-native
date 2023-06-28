@@ -47,5 +47,17 @@ router.delete('/:id', (req, res)=>{
 })
 
 
+//find a category by id
+
+router.get('/:id', async  (req, res) => {
+    const category = await Category.findById(req.params.id);
+
+    if(!category){
+        return res.status(404).send('the category cannot be created...')
+    }
+
+    res.send(category);
+    
+})
 
 module.exports = router;
