@@ -3,6 +3,7 @@ const {Product} = require('../models/product');
 const express = require('express');
 const router = express.Router();
 
+//get all products
 router.get(`/`, async (req, res) =>{
     const productList = await Product.find();
 
@@ -12,6 +13,20 @@ router.get(`/`, async (req, res) =>{
     res.send(productList);
 })
 
+//get a specific product by id
+
+router.get(`/:id`, async (req, res) =>{
+    const product = await Product.findById(req.params.id).populate('category'); 
+
+
+    if(!product) {
+        res.status(500).json({success: false})
+    } 
+    res.send(product);
+})
+
+
+//add a product
 router.post(`/:id`,async (req, res) =>{
 
     //first check if there is a valid category
