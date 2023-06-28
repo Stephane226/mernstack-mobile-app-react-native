@@ -6,8 +6,12 @@ const morgan = require('morgan')
 app.use(morgan('tiny'))
 const api = process.env.API_URL
 
-
+//routes
 const productsRouter = require('./routes/products')
+const categoriesRouter = require('./routes/categories')
+const usersRoutes = require("./routes/users");
+const ordersRoutes = require("./routes/orders");
+
 
 const Product = require('./models/product')
 const mongoose = require('mongoose')
@@ -24,17 +28,6 @@ mongoose.connect('mongodb+srv://masaaki:1234bb@cluster0.ntqy8yu.mongodb.net/db?r
 })
 
 
-const productSchema = mongoose.Schema({
-    name: String,
-    image: String,
-
-    countInStock : {
-    type: Number,
-    required : true
-    },
-
-})
-
 
 
 app.listen(3000, ()=>{
@@ -42,3 +35,6 @@ app.listen(3000, ()=>{
 })
 
 app.use(`/products`, productsRouter)
+app.use('/categories' , categoriesRouter)
+app.use(`/users`, usersRoutes);
+app.use(`/orders`, ordersRoutes);
