@@ -5,7 +5,7 @@ app.use(express.json())
 const morgan = require('morgan')
 app.use(morgan('tiny'))
 const api = process.env.API_URL
-
+const authJwt = require('./helpers/jwt')
 //routes
 const productsRouter = require('./routes/products')
 const categoriesRouter = require('./routes/categories')
@@ -34,7 +34,10 @@ app.listen(3000, ()=>{
     console.log('server listening on the 3000')
 })
 
+
+//middlewares
 app.use(`/products`, productsRouter)
 app.use('/categories' , categoriesRouter)
 app.use(`/users`, usersRoutes);
 app.use(`/orders`, ordersRoutes);
+app.use(authJwt())
