@@ -39,6 +39,20 @@ router.put(`/:id`, async (req, res) =>{
     res.send(orderProduct);
 })
 
+
+//get only one specific order by id and delete
+router.delete(`/:id`, async (req, res) =>{
+    const deleteOrderProduct = await Order.findByIdAndDelete(req.params.id)
+
+    if(!deleteOrderProduct) {
+        res.status(500).json({success: false})
+    } 
+    res.send('PRODUCT DELETED...');
+})
+
+
+
+
 router.post('/' , async (req,res) =>{
     const orderItemsIds = Promise.all(req.body.orderItems.map(async orderItem  =>{
 
