@@ -12,6 +12,16 @@ router.get(`/`, async (req, res) =>{
     res.send(orderList);
 })
 
+//get only one specific order by id
+router.get(`/:id`, async (req, res) =>{
+    const orderProduct = await Order.findById(req.params.id).populate('user')
+
+    if(!orderProduct) {
+        res.status(500).json({success: false})
+    } 
+    res.send(orderProduct);
+})
+
 
 
 
