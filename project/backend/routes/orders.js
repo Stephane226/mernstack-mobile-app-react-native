@@ -42,12 +42,56 @@ router.put(`/:id`, async (req, res) =>{
 
 //get only one specific order by id and delete
 router.delete(`/:id`, async (req, res) =>{
-    const deleteOrderProduct = await Order.findByIdAndDelete(req.params.id)
+ 
+    Order.findByIdAndDelete(req.params.id).then(async order =>{
+       if(order){
+        await order.orderItems.map(async orderItem =>{
+            await OrderItem.findByIdAndRemove(orderItem)
+        })
+        return res.status(200).json({success : true, message : 'all item deleted...'})
+       }else{
+        return res.status(400).json({success : false, message : 'all item nott  deleted...'})
 
-    if(!deleteOrderProduct) {
-        res.status(500).json({success: false})
-    } 
-    res.send('PRODUCT DELETED...');
+       }
+   })
+
+
+    /*
+    
+        
+  const orderTodelete = () =>{ 
+    const orderToDelet =  Order.findById(req.params.id)
+   // console.log(JSON.stringify(orderToDelet.country) )
+   return orderToDelet
+    }
+
+
+
+   orderTodelete()
+   .then(function(orderTodelete) {
+    return orderTodelete.orderItems
+   }).then( function(result){
+        //  res.send(result)
+          result.map(item =>{
+            //console.log(item.toString())
+          OrderItem.findByIdAndRemove(item.toString())
+           //console.log(JSON.stringify(item))
+        }).then(res.send('deleted'))
+
+
+   })
+ 
+    
+    
+    */
+    //orderItems.map(item =>{
+    //    OrderItem.findByIdAndDelete(item)
+    //})
+
+   // if(!deleteOrderProduct) {
+       // res.status(500).json({success: false})
+   // } 
+   // res.send('PRODUCT DELETED...');
 })
 
 
