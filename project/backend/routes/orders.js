@@ -22,8 +22,22 @@ router.get(`/:id`, async (req, res) =>{
     res.send(orderProduct);
 })
 
+//update a specific order
 
+router.put(`/:id`, async (req, res) =>{
+    const orderProduct = await Order.findByIdAndUpdate(
+        req.params.id,
+        {
+          status : req.body.status
+        },
+        { new: true}
+    )
 
+    if(!orderProduct) {
+        res.status(500).json({success: false})
+    } 
+    res.send(orderProduct);
+})
 
 router.post('/' , async (req,res) =>{
     const orderItemsIds = Promise.all(req.body.orderItems.map(async orderItem  =>{
