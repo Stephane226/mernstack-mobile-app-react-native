@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get(`/`, async (req, res) =>{
-    const orderList = await Order.find().populate('user');
+    const orderList = await Order.find().populate('user', 'name email').sort({'dateOrdered' : -1});//newest to oldest
 
     if(!orderList) {
         res.status(500).json({success: false})
