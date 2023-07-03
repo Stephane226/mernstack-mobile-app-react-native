@@ -11,8 +11,8 @@ const storage = multer.diskStorage({
       cb(null, '/public/uploads')
     },
     filename: function (req, file, cb) {
-      const filename = file.originalname.replace(' ', '-')
-      cb(null, file.fieldname + '-' + filename + Date.now())
+      const fileName = file.originalname.replace(' ', '-')
+      cb(null, fileName  +'-' + Date.now())
     }
   })
   
@@ -46,7 +46,7 @@ router.get(`/:id`, async (req, res) =>{
 
 
 //add a product
-router.post(`/:id`, uploadOptions.single('image'), async (req, res) =>{
+router.post(`/`, uploadOptions.single('image'), async (req, res) =>{
 
     //first check if there is a valid category
     const category = Category.findById(req.body.category);
@@ -55,7 +55,7 @@ router.post(`/:id`, uploadOptions.single('image'), async (req, res) =>{
     }
 
     const fileName = req.file.filename
-    const basePath = `${req.protocol}://${req.get('host')}/public/upload`;
+    const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
     const product = new Product({
         name: req.body.name,
         image: `${basePath}${fileName}`,
