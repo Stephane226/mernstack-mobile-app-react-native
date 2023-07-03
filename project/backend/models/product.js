@@ -5,9 +5,10 @@ const productSchema = mongoose.Schema({
         type: String,
         required : true,
     },
+    
     description: {
         type: String,
-        required : true,
+        required : 'enter descr',
     },
 
     richDescription: {
