@@ -16,18 +16,29 @@ const ProductCard = (props) =>{
 
       return(
 
-             <View>
-                <Image style={style.image}/>
+             <View style={style.container}>
+                <Image style={style.image}
+                resizeMode="cover"
+                source={{uri : image ? image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'}}
+                />
                 <View style={style.card}/>
                 <Text style={style.title}>
                    {
-                    name.length > 15 ? name.substring(0 , 15, -3)
+                    name.lenght > 15 ? name.substring(0 , 15, -3)
                     + '...' :name
                    }
                     </Text>
                     <Text style={style.price}>
                       ${price}
                     </Text>
+
+                    {
+                        CountInstock > 0 ?(
+                            <View  style={{marginBottom : 60}}>
+                                <Button title={'add'} color={'green'}></Button>
+                             </View>   
+                        ) : <Text style={{margonTop : 20}}>Curently Unavailable</Text>
+                    }
                 
              </View>
       )
@@ -51,7 +62,7 @@ const style = StyleSheet.create({
         width : width /2 -20 -10,
         height : width / 2- 20 - 90,
         backgroundColor: 'transparent',
-        width : width / 2 - 20 -10
+       marginTop:-40
     },
     title:{
         fontWeight : 'bold',

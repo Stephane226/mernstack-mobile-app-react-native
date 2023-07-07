@@ -2,14 +2,16 @@ import { StatusBar } from 'expo-status-bar';
 import { Dimensions, StyleSheet, Text, View ,TouchableOpacity} from 'react-native';
 
 import React from 'react';
+import ProductCard from './productCard';
 var {width} = Dimensions.get('window')
 
 
- const ProductList = (props)=> {
+  const ProductList = (props)=> {
+    const {item} = props
   return (
     <TouchableOpacity style={{width : '50%'}}>
        <View style={{ width :width/2 , backgroundColor: 'gainsboro'}}>
-       
+           <ProductCard {...item} />
        </View>
     </TouchableOpacity>
   );
@@ -23,3 +25,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+export default ProductList

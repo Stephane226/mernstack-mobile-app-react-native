@@ -1,9 +1,12 @@
 import React , {useEffect, useState} from 'react'
 import {View, StyleSheet, ActivityIndicator, Text,FlatList } from 'react-native'
-import Productlist from './productlist'
+import ProductList from './productlist'
 
 const data = require('../../assets/data/products.json')
-export default function productContainer(){
+
+
+
+export default function productContainer(props){
     const [products , setProducts ] = useState([])
     useEffect(()=>{
         setProducts(data)
@@ -14,12 +17,15 @@ export default function productContainer(){
     return(
         <View>
             <Text>Products container </Text>
-            <View style={{marginTop:100}}>
+            <View style={{marginTop:10}}>
             <FlatList 
+              
+              numColumns={2}
               data = {products}
-              renderItem= {({item })=> <Text> {item.brand}</Text> }
-              keyExtrator = {item => item.name}
-              key={item.id}
+              renderItem= {({item} )=> <ProductList key={item.id}     item = {item} /> }
+          
+              keyExtractor = { item => item.name}
+            
           
 
             />
