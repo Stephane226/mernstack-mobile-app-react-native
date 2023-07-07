@@ -15,7 +15,8 @@ export default function productContainer(props){
         }
     },[])
     return(
-        <View>
+        
+        <View style={styles.listContainer}>
             <Text>Products container </Text>
             <View style={{marginTop:10}}>
             <FlatList 
@@ -32,5 +33,25 @@ export default function productContainer(props){
             </View>
         
         </View>
+     
     )
 }
+const styles = StyleSheet.create({
+    container: {
+      flexWrap: "wrap",
+      backgroundColor: "gainsboro",
+    },
+    listContainer: {
+     
+      flex: 1,
+      flexDirection: "row",
+      alignItems: "flex-start",
+      flexWrap: "wrap",
+      backgroundColor: "gainsboro",
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+  });
+  
