@@ -16,20 +16,22 @@ import { Feather, Entypo } from "@expo/vector-icons";
 
 export default function productContainer(props) {
   const [products, setProducts] = useState([]);
-  const [productsFiltered, setproductsFiltered] = useState([]);
+  const [productsFiltered, setProductsFiltered] = useState([]);
+  const [inputValue, setInputValue] = useState('')
   const [focus, setFocus] = useState(false);
 
   useEffect(() => {
     setProducts(data);
-    setproductsFiltered(data);
+    setProductsFiltered(data);
 
     return () => {
       setProducts([]);
     };
   }, []);
 
-  const searchProduct = (text) => {
-    setproductsFiltered(products.filter((i) => i.name.includes(text)));
+  const searchProduct = (cnt) => {
+    setProductsFiltered(products.filter((i) => i.name.toLowerCase().includes(cnt.toLowerCase())));
+    setInputValue(cnt)
   };
 
   const openList = () => {
@@ -56,7 +58,8 @@ export default function productContainer(props) {
             style={styles.input}
             placeholder="Search"
             onFocus={openList}
-            onChange={(text) => searchProduct(text)}
+            onChangeText = {(cnt) => searchProduct(cnt)}
+            value= {inputValue}
           />
 
           {focus == true ? (
@@ -71,12 +74,21 @@ export default function productContainer(props) {
 
   return (
     <View>
-      <SearchBar />
+    
       {focus == true ? (
         <View>
-          <SearchedProduct productsFiltered={productsFiltered} />
+         <SearchBar />
+        <View style={styles.listContainer}>
+          <Text>Products container </Text>
+
+          <View style={{ marginTop: 10 }}>
+            <SearchedProduct productsFiltered={productsFiltered} />
+          </View>
+        </View>
         </View>
       ) : (
+        <View>
+        <SearchBar />
         <View style={styles.listContainer}>
           <Text>Products container </Text>
 
@@ -90,6 +102,7 @@ export default function productContainer(props) {
               keyExtractor={(item) => item.name}
             />
           </View>
+        </View>
         </View>
       )}
     </View>
