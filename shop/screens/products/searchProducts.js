@@ -11,17 +11,22 @@ import React from 'react';
 
     return(
         <View>
+
             { 
             productsFiltered.length > 0 ? (
                 productsFiltered.map((item) => (
                     <View 
                     key ={item._id}
                     avatar
+                    style={{flexDirection:'row',backgroundColor : '#292c3326',
+                    marginVertical:5,
+                     padding:10,
+                }}
                      >
 
-                 <Image style={{width:20, height:20}}
-                 resizeMode="cover"
-                 source={{uri : image ? image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'}}
+                 <Image style={{width:60, height:50, marginRight : 20}}
+                 resizeMode="contain"
+                 source={{uri : item.image ? item.image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'}}
                  /> 
 
                  <View>
@@ -37,7 +42,7 @@ import React from 'react';
                 ))
             ) : (
                 <View>
-                    <Text style={{alignSelf:'CENTER'}}>
+                    <Text style={{alignSelf:'center'}}>
                     No product match...
                     </Text>
                  </View>
