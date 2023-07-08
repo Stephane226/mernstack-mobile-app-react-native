@@ -20,21 +20,21 @@ const Banner = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <ScrollView >
       <View style={styles.container}>
-        <View style={styles.swiper}>
+        <View >
           <Swiper
             style={{ height: width / 2 }}
             showButtons={false}
             autoplay={true}
-            autoplayTimeout={2}
+            autoplayTimeout={4}
           >
             {bannerData.map((item) => {
               return (
                 <Image
                   key={item}
                   style={styles.imageBanner}
-                  resizeMode="contain"
+                  resizeMode="cover"
                   source={{ uri: item }}
                 />
               );
@@ -50,7 +50,9 @@ const Banner = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "gainsboro",
+    backgroundColor: "gainsbredoro",
+    
+
   },
   swiper: {
     width: width,
