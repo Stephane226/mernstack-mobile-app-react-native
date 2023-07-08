@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   Text,
   FlatList,
+  ScrollView,
 } from "react-native";
 import ProductList from "./productlist";
 import SearchedProduct from "./searchProducts";
@@ -44,6 +45,7 @@ export default function productContainer(props) {
       setCategories([]);
       setActive()
       setInitialState()
+      setProductsCtg([])
 
     };
     
@@ -68,7 +70,7 @@ export default function productContainer(props) {
     : 
   
    setProductsCtg(
-    [ products.filter( (i) => i.category._id = ctg),
+    [ products.filter( (i) => i.category.$oid === ctg),
     setActive(true)
      ]
      )
@@ -141,20 +143,31 @@ export default function productContainer(props) {
           
 
          />
+            <ScrollView
+           horizontal='true'
+           >
         <View style={styles.listContainer}>
-       
 
-          <View style={{ marginTop: 10 }}>
-            <FlatList
-              numColumns={2}
-              data={products}
-              renderItem={({ item }) => (
-                <ProductList key={item.id} item={item} />
-              )}
-              keyExtractor={(item) => item.name}
-            />
-          </View>
+         { 
+            productsCtg.length > 0 ? (
+             productsCtg.map((item, index) => {
+              return(
+                <ProductList 
+                key={index}
+                item ={item}
+               />
+
+              )
+             })
+            ):(
+            <View>
+              <Text>NO DATA</Text>
+            </View>
+              
+            )
+            }
         </View>
+        </ScrollView>
         </View>
       )}
     </View>
