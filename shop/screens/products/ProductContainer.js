@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import ProductList from "./productlist";
 import SearchedProduct from "./searchProducts";
+import Banner from "../../shared/banner";
 
 const data = require("../../assets/data/products.json");
 
@@ -78,6 +79,7 @@ export default function productContainer(props) {
       {focus == true ? (
         <View>
          <SearchBar />
+         <Banner/>
         <View style={styles.listContainer}>
           <Text>Products container </Text>
 
@@ -89,6 +91,7 @@ export default function productContainer(props) {
       ) : (
         <View>
         <SearchBar />
+        <Banner/>
         <View style={styles.listContainer}>
           <Text>Products container </Text>
 
