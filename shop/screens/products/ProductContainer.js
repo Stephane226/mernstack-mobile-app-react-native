@@ -12,7 +12,7 @@ import Banner from "../../shared/banner";
 import Categoryfilter from './CategoryFilter'
 
 const data = require("../../assets/data/products.json");
-const categories = require("../../assets/data/categories.json");
+const productsCategories = require("../../assets/data/categories.json");
 
 
 import { TextInput, Keyboard, Button } from "react-native";
@@ -26,15 +26,16 @@ export default function productContainer(props) {
   const [categories , setCategories] = useState([])
   const [active, setActive] = useState()
   const [initialState, setInitialState] = useState([])
-
+  const [productsCtg, setProductsCtg] = useState([])
 
   useEffect(() => {
     setProducts(data);
     setProductsFiltered(data);
     setFocus(false)
-    setCategories(categories);
+    setCategories(productsCategories);
     setActive(-1)
     setInitialState(data)
+    setProductsCtg(data)
  
     return () => {
       setProducts([]);
@@ -61,6 +62,18 @@ export default function productContainer(props) {
     setFocus(false);
   };
 
+  const changeCtg = (ctg) =>{
+    ctg = 'all' ?    
+     [setCategories(categories),setActive(true) ]
+    : 
+  
+   setProductsCtg(
+    [ products.filter( (i) => i.category._id = ctg),
+    setActive(true)
+     ]
+     )
+
+  }
   const SearchBar = () => {
     return (
       <View style={styles.container2}>
@@ -98,7 +111,15 @@ export default function productContainer(props) {
         <View>
          <SearchBar />
          <Banner/>
-         <Categoryfilter/>
+         <Categoryfilter
+          categories = {categories}
+          CategoryFilter ={ changeCtg}
+          productsCtg = {productsCtg}
+          active = {active}
+          setActive ={ setActive}
+          productsCategories = {productsCategories}
+
+         />
         <View style={styles.listContainer}>
           <Text>Products container </Text>
 
@@ -111,9 +132,17 @@ export default function productContainer(props) {
         <View>
         <SearchBar />
         <Banner/>
-        <Categoryfilter/>
+        <Categoryfilter
+          categories = {categories}
+          CategoryFilter ={ changeCtg}
+          productsCtg = {productsCtg}
+          active = {active}
+          setActive ={ setActive}
+          
+
+         />
         <View style={styles.listContainer}>
-          <Text>Products container </Text>
+       
 
           <View style={{ marginTop: 10 }}>
             <FlatList
