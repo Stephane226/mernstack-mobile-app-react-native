@@ -9,8 +9,11 @@ import {
 import ProductList from "./productlist";
 import SearchedProduct from "./searchProducts";
 import Banner from "../../shared/banner";
+import Categoryfilter from './CategoryFilter'
 
 const data = require("../../assets/data/products.json");
+const categories = require("../../assets/data/categories.json");
+
 
 import { TextInput, Keyboard, Button } from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
@@ -20,14 +23,29 @@ export default function productContainer(props) {
   const [productsFiltered, setProductsFiltered] = useState([]);
   const [inputValue, setInputValue] = useState('')
   const [focus, setFocus] = useState(false);
+  const [categories , setCategories] = useState([])
+  const [active, setActive] = useState()
+  const [initialState, setInitialState] = useState([])
+
 
   useEffect(() => {
     setProducts(data);
     setProductsFiltered(data);
-
+    setFocus(false)
+    setCategories(categories);
+    setActive(-1)
+    setInitialState(data)
+ 
     return () => {
       setProducts([]);
+      setProductsFiltered([]);
+      setFocus()
+      setCategories([]);
+      setActive()
+      setInitialState()
+
     };
+    
   }, []);
 
   const searchProduct = (cnt) => {
@@ -80,6 +98,7 @@ export default function productContainer(props) {
         <View>
          <SearchBar />
          <Banner/>
+         <Categoryfilter/>
         <View style={styles.listContainer}>
           <Text>Products container </Text>
 
@@ -92,6 +111,7 @@ export default function productContainer(props) {
         <View>
         <SearchBar />
         <Banner/>
+        <Categoryfilter/>
         <View style={styles.listContainer}>
           <Text>Products container </Text>
 
