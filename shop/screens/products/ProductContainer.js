@@ -31,7 +31,8 @@ export default function productContainer(props) {
   }, []);
 
   const searchProduct = (text) => {
-    setProductsFiltered(
+  
+    setproductsFiltered(
          products.filter((i) => i.name.toLowerCase().includes(text.toLowerCase()))
     )
   }
@@ -60,9 +61,7 @@ export default function productContainer(props) {
            style={styles.input} 
            placeholder="Search" 
            onFocus={openList}
-           onChange={(text) => {
-              searchProduct(text)
-           }}
+           onChange={(text) =>  searchProduct(text)}
 
            />
 
