@@ -7,23 +7,21 @@ import {
   FlatList,
 } from "react-native";
 import ProductList from "./productlist";
-import SearchedProduct from './searchProducts'
+import SearchedProduct from "./searchProducts";
 
 const data = require("../../assets/data/products.json");
 
 import { TextInput, Keyboard, Button } from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
 
-
-
 export default function productContainer(props) {
   const [products, setProducts] = useState([]);
   const [productsFiltered, setproductsFiltered] = useState([]);
-  const [focus, setFocus] = useState(false)
+  const [focus, setFocus] = useState(false);
 
   useEffect(() => {
     setProducts(data);
-    setproductsFiltered(data)
+    setproductsFiltered(data);
 
     return () => {
       setProducts([]);
@@ -31,19 +29,16 @@ export default function productContainer(props) {
   }, []);
 
   const searchProduct = (text) => {
-  
-    setproductsFiltered(
-         products.filter((i) => i.name.toLowerCase().includes(text.toLowerCase()))
-    )
-  }
+    setproductsFiltered(products.filter((i) => i.name.includes(text)));
+  };
 
-  const openList = () =>{
-    setFocus(true)
-  }
+  const openList = () => {
+    setFocus(true);
+  };
 
-  const onBlur = () =>{
-    setFocus(false)
-  }
+  const onBlur = () => {
+    setFocus(false);
+  };
 
   const SearchBar = () => {
     return (
@@ -58,54 +53,45 @@ export default function productContainer(props) {
           />
           {/* Input field */}
           <TextInput
-           style={styles.input} 
-           placeholder="Search" 
-           onFocus={openList}
-           onChange={(text) =>  searchProduct(text)}
+            style={styles.input}
+            placeholder="Search"
+            onFocus={openList}
+            onChange={(text) => searchProduct(text)}
+          />
 
-           />
-
-{
-            focus == true ? (
-                <Text onPress={onBlur} style={{marginLeft:-10}} >X</Text>
-            ):(
-                null
-            )
-           }
-
+          {focus == true ? (
+            <Text onPress={onBlur} style={{ marginLeft: -10 }}>
+              X
+            </Text>
+          ) : null}
         </View>
       </View>
     );
   };
 
-
   return (
-    <View> 
-         <SearchBar />
-        {
-            focus == true ? (
-                <View>
-                    <SearchedProduct
-                     productsFiltered = {productsFiltered}
-                    />
-                    </View>
-                
-            ) : (
-                <View style={styles.listContainer}>
-                <Text>Products container </Text>
-               
-                <View style={{ marginTop: 10 }}>
-                  <FlatList
-                    numColumns={2}
-                    data={products}
-                    renderItem={({ item }) => <ProductList key={item.id} item={item} />}
-                    keyExtractor={(item) => item.name}
-                  />
-                </View>
-              </View>
-            )
-        }
-   
+    <View>
+      <SearchBar />
+      {focus == true ? (
+        <View>
+          <SearchedProduct productsFiltered={productsFiltered} />
+        </View>
+      ) : (
+        <View style={styles.listContainer}>
+          <Text>Products container </Text>
+
+          <View style={{ marginTop: 10 }}>
+            <FlatList
+              numColumns={2}
+              data={products}
+              renderItem={({ item }) => (
+                <ProductList key={item.id} item={item} />
+              )}
+              keyExtractor={(item) => item.name}
+            />
+          </View>
+        </View>
+      )}
     </View>
   );
 }
