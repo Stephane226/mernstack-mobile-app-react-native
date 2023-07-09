@@ -65,15 +65,22 @@ export default function productContainer(props) {
   };
 
   const changeCtg = (ctg) =>{
-    ctg = 'all' ?    
+
+
+    ctg === 'all' ?    
      [setCategories(categories),setActive(true) ]
-    : 
+    
+     : [
+      setProductsCtg(
+        products.filter((i) => i.category.$oid === ctg),
+        setActive(true)
+      ),
+    ];
   
-   setProductsCtg(
-    [ products.filter( (i) => i.category.$oid === ctg),
-    setActive(true)
-     ]
-     )
+
+  
+   
+  // console.log(products.filter( (i) => i.category.$oid == '5f15d5b7cb4a6642bddc0fe8'))
 
   }
   const SearchBar = () => {
@@ -115,7 +122,7 @@ export default function productContainer(props) {
          <Banner/>
          <Categoryfilter
           categories = {categories}
-          CategoryFilter ={ changeCtg}
+          changeCtg ={changeCtg}
           productsCtg = {productsCtg}
           active = {active}
           setActive ={ setActive}
@@ -136,7 +143,7 @@ export default function productContainer(props) {
         <Banner/>
         <Categoryfilter
           categories = {categories}
-          CategoryFilter ={ changeCtg}
+          changeCtg ={changeCtg}
           productsCtg = {productsCtg}
           active = {active}
           setActive ={ setActive}

@@ -25,7 +25,7 @@ const Categoryfilter = (props) => {
           <TouchableOpacity
             key={1}
             onPress={() => {
-              props.CategoryFilter("all"), props.setActive(-1);
+              props.changeCtg("all"), props.setActive(-1);
             }}
           >
             <View
@@ -56,9 +56,10 @@ const Categoryfilter = (props) => {
           <View style={{ margin: 0, padding: 0, borderRadius: 0 }}>
             <TouchableOpacity
               key={item._id.$oid}
-              onPress={() => {
-                props.CategoryFilter(item.category.$oid),
-                  props.setActive(props.categories.indexOf(item));
+              onPress={  () => {              
+               props.changeCtg(item._id.$oid),
+               props.setActive(props.categories.indexOf(item));
+
               }}
             >
               <View
