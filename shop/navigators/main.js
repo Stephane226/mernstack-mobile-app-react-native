@@ -1,8 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, TouchableOpacity } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tab'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import React from 'react';
+
+
+//stacks
+import HomeNavigator from './homeNavigator'
+
+
 
 const Tab = createBottomTabNavigator()
 const Main = () => {
@@ -13,14 +19,15 @@ const Main = () => {
             tabBarOptions={{
                 KeyboardHidesTabBar: true,
                 showLabel: false,
-                activetINcOLOR: 'red'
+                activeTintColor: 'red',
+            
 
             }}
         >
 
             <Tab.Screen
                 name='Home'
-                component={ }
+                component={ HomeNavigator }
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Icon
@@ -29,7 +36,8 @@ const Main = () => {
                             color={color}
                             size={30}
                         />
-                    )
+                    ),
+                    headerShown : false
                 }}
 
             />
@@ -37,7 +45,7 @@ const Main = () => {
 
             <Tab.Screen
                 name='Cart'
-                component={ }
+                component={ HomeNavigator }
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Icon
@@ -46,7 +54,8 @@ const Main = () => {
                             color={color}
                             size={30}
                         />
-                    )
+                    ),
+                    headerShown : false
                 }}
 
             />
@@ -54,7 +63,7 @@ const Main = () => {
 
             <Tab.Screen
                 name='Admin'
-                component={ }
+                component={ HomeNavigator }
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Icon
@@ -64,6 +73,8 @@ const Main = () => {
                             size={30}
                         />
                     )
+                    ,
+                headerShown : false
                 }}
 
             />
@@ -71,7 +82,7 @@ const Main = () => {
 
             <Tab.Screen
                name='User'
-               component = {}
+               component = {HomeNavigator}
                options = {{
                 tabBarIcon : ({color}) => (
                     <Icon
@@ -80,7 +91,8 @@ const Main = () => {
                        color = {color}
                        size = {30}
                     />
-                )
+                ),
+                headerShown : false
                }}
 
             />

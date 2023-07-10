@@ -162,6 +162,7 @@ export default function productContainer(props) {
                 <ProductList 
                 key={index}
                 item ={item}
+                navigation = {props.navigation}
                />
 
               )
