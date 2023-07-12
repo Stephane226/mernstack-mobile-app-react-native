@@ -2,23 +2,26 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from './shared/header'
 import React from 'react';
-//screens
-import ProductContainer from './screens/products/ProductContainer'
+import { NavigationContainer } from '@react-navigation/native'
+import { LogBox} from 'react-native';
+LogBox.ignoreAllLogs(true)
+
+//navigators
+import Main from './navigators/main'
+
+//redux
+import { Provider } from 'react-redux';
+import store from './Redux/store';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Header />
-      <ProductContainer/>
-    </View>
+    <Provider store={store}>
+    <NavigationContainer>  
+         <Header />
+      <Main/>
+    </NavigationContainer>
+    </Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+

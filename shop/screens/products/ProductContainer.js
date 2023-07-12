@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   Text,
   FlatList,
+  ScrollView,
 } from "react-native";
 import ProductList from "./productlist";
 import SearchedProduct from "./searchProducts";
@@ -44,6 +45,7 @@ export default function productContainer(props) {
       setCategories([]);
       setActive()
       setInitialState()
+      setProductsCtg([])
 
     };
     
@@ -63,15 +65,22 @@ export default function productContainer(props) {
   };
 
   const changeCtg = (ctg) =>{
-    ctg = 'all' ?    
+
+
+    ctg === 'all' ?    
      [setCategories(categories),setActive(true) ]
-    : 
+    
+     : [
+      setProductsCtg(
+        products.filter((i) => i.category.$oid === ctg),
+        setActive(true)
+      ),
+    ];
   
-   setProductsCtg(
-    [ products.filter( (i) => i.category._id = ctg),
-    setActive(true)
-     ]
-     )
+
+  
+   
+  // console.log(products.filter( (i) => i.category.$oid == '5f15d5b7cb4a6642bddc0fe8'))
 
   }
   const SearchBar = () => {
@@ -113,7 +122,7 @@ export default function productContainer(props) {
          <Banner/>
          <Categoryfilter
           categories = {categories}
-          CategoryFilter ={ changeCtg}
+          changeCtg ={changeCtg}
           productsCtg = {productsCtg}
           active = {active}
           setActive ={ setActive}
@@ -134,27 +143,39 @@ export default function productContainer(props) {
         <Banner/>
         <Categoryfilter
           categories = {categories}
-          CategoryFilter ={ changeCtg}
+          changeCtg ={changeCtg}
           productsCtg = {productsCtg}
           active = {active}
           setActive ={ setActive}
           
 
          />
+            <ScrollView
+           horizontal='true'
+           >
         <View style={styles.listContainer}>
-       
 
-          <View style={{ marginTop: 10 }}>
-            <FlatList
-              numColumns={2}
-              data={products}
-              renderItem={({ item }) => (
-                <ProductList key={item.id} item={item} />
-              )}
-              keyExtractor={(item) => item.name}
-            />
-          </View>
+         { 
+            productsCtg.length > 0 ? (
+             productsCtg.map((item, index) => {
+              return(
+                <ProductList 
+                key={index}
+                item ={item}
+                navigation = {props.navigation}
+               />
+
+              )
+             })
+            ):(
+            <View>
+              <Text>NO DATA</Text>
+            </View>
+              
+            )
+            }
         </View>
+        </ScrollView>
         </View>
       )}
     </View>
