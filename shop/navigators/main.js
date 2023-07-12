@@ -7,6 +7,7 @@ import React from 'react';
 
 //stacks
 import HomeNavigator from './homeNavigator'
+import CartNavigator from './CartNavigator'
 
 
 
@@ -45,11 +46,11 @@ const Main = () => {
 
             <Tab.Screen
                 name='Cart'
-                component={ HomeNavigator }
+                component={ CartNavigator }
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Icon
-                            name='shopping-card'
+                            name='shopping-scard'
                             style={{ position: 'relative' }}
                             color={color}
                             size={30}

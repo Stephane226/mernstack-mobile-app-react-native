@@ -9,12 +9,18 @@ LogBox.ignoreAllLogs(true)
 //navigators
 import Main from './navigators/main'
 
+//redux
+import { Provider } from 'react-redux';
+import store from './Redux/store';
+
 export default function App() {
   return (
+    <Provider store={store}>
     <NavigationContainer>  
          <Header />
       <Main/>
     </NavigationContainer>
+    </Provider>
   );
 }
 

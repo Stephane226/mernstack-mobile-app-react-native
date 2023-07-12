@@ -5,7 +5,8 @@ import React from 'react';
 //screens
 import ProductContainer from '../screens/products/ProductContainer'
 import SingleProduct from '../screens/products/singleProduct';
-import Cart from '../screens/card/cart';
+import Cart from '../screens/card/cart'
+
 
 const Stack = createStackNavigator()
 
@@ -13,8 +14,8 @@ function MyStack(){
     return(
         <Stack.Navigator>
              <Stack.Screen
-                name='Homes'
-                component = {ProductContainer}
+                name='cart'
+                component = {Cart}
                 options={{
                     headerShown : false,
                 }}
@@ -30,12 +31,14 @@ function MyStack(){
               />
 
 
+
+
         </Stack.Navigator>
 
         
     )
 }
 
-export default function HomeNavigator(){
+export default function CartNavigator(){
     return <MyStack />
 }
