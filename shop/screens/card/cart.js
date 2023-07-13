@@ -17,7 +17,16 @@ const Cart = (props) => {
       {props.cartItems.length ? (
         <View style={styles.container}>
           {props.cartItems.map((x) => {
-            return <Text> {x.product.name}</Text>;
+            return (
+              <View style={{flex:1,width:'100%'}}>
+                 <Image style={{width:60, height:60}}
+                resizeMode="cover"
+                source={{uri : x.product.name?  x.product.name : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'}}
+                />
+                 <Text>{x.product.name}</Text>
+                 <Text>{x.product.price}</Text>
+              </View>
+            )
           })}
         </View>
       ) : (
@@ -39,7 +48,8 @@ const mapStateToProps = (state) => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    flexDirection: "row",
+    height:300,
+    flexDirection: 'column',
     alignContent: "center",
     justifyContent: "center",
     padding: 20,
