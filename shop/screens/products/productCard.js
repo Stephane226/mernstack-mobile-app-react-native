@@ -9,7 +9,6 @@ import {
 } from 'react-native'
 
 import  {connect} from 'react-redux'
-import { Connect } from "react-redux";
 import * as actions from '../../Redux/actions/cartActions'
 var {width} = Dimensions.get('window');
 
