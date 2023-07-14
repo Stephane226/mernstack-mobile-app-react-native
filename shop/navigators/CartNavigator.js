@@ -7,6 +7,8 @@ import ProductContainer from '../screens/products/ProductContainer'
 import SingleProduct from '../screens/products/singleProduct';
 import Cart from '../screens/card/cart'
 
+import CheckoutNavigator from './CheckoutNavigator';
+
 
 const Stack = createStackNavigator()
 
@@ -23,8 +25,8 @@ function MyStack(){
 
 
             <Stack.Screen
-                name='Product Details'
-                component = {SingleProduct}
+                name='Checkout'
+                component = {CheckoutNavigator}
                 options={{
                     headerShown : false,
                 }}

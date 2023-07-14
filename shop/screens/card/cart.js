@@ -68,7 +68,14 @@ const Cart = (props) => {
                     props.clearCart()
                    }}
                  />
-                   <Text> Checkout</Text>
+                  <Button
+                   title='Checkout'
+
+                  onPress={ () => {
+                   props.navigation.navigate('Checkout')
+                  }}
+                  />
+
         </View>
         </View>
 
