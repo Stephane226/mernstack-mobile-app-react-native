@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import FormContainer from "../../shared/forms/formContainer";
 import Input from "../../shared/forms/input";
+import Error from "../../shared/Error";
 
 
 const Login = (props) =>{
@@ -18,6 +19,20 @@ const Login = (props) =>{
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+
+    const handleSubmit = () => {
+        const user = {
+          email : email,
+          password : password,
+        };
+    
+        if (email === "" || password === "") {
+          setError("Please fill in your credentials");
+        
+        } else {
+        console.log('success')
+        }
+      };
 
 
     return(
