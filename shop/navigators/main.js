@@ -8,7 +8,7 @@ import React from 'react';
 //stacks
 import HomeNavigator from './homeNavigator'
 import CartNavigator from './CartNavigator'
-
+import UserNavigator from './UserNavigator';
 
 
 const Tab = createBottomTabNavigator()
@@ -81,9 +81,10 @@ const Main = () => {
             />
 
 
+
             <Tab.Screen
-               name='User'
-               component = {HomeNavigator}
+               name='User Navigator'
+               component = {UserNavigator}
                options = {{
                 tabBarIcon : ({color}) => (
                     <Icon
@@ -97,6 +98,7 @@ const Main = () => {
                }}
 
             />
+
 
         </Tab.Navigator>
 
