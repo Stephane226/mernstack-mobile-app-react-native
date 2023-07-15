@@ -4,6 +4,7 @@ import Header from './shared/header'
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { LogBox} from 'react-native';
+import {Toast}  from 'react-native-toast-message/lib/src/Toast';
 LogBox.ignoreAllLogs(true)
 
 //navigators
@@ -19,6 +20,7 @@ export default function App() {
     <NavigationContainer>  
          <Header />
       <Main/>
+      <Toast/>
     </NavigationContainer>
     </Provider>
   );

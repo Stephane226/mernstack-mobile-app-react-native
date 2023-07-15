@@ -44,7 +44,7 @@ const Register = (props) => {
             });
             setTimeout(() => {
               props.navigation.navigate("Login");
-            }, 500);
+            }, 3000);
           }
         })
         .catch((error) => {
