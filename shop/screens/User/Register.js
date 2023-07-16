@@ -17,6 +17,7 @@ const Register = (props) => {
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    s
   
     const registerUser = () => {
       if (email === "" || name === "" || phone === "" || password === "") {
@@ -47,6 +48,7 @@ const Register = (props) => {
             }, 3000);
           }
         })
+
         .catch((error) => {
           Toast.show({
             topOffset: 60,
