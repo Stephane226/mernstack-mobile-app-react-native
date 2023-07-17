@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -11,14 +11,25 @@ import {
 import FormContainer from "../../shared/forms/formContainer";
 import Input from "../../shared/forms/input";
 import Error from "../../shared/Error";
+import  loginUser  from "../../Context/actions/auth.actions";
+import authGlobal from "../../Context/store/auth.global";
 
 
 const Login = (props) =>{
 
-
+  
+    const context = useContext(authGlobal)
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+
+
+    useEffect(() => {
+      if (!context.stateUser.isAuthenticated) {
+        props.navigation.navigate("userprofile");
+      }
+    }, [context.stateUser.isAuthenticated]);
+
 
     const handleSubmit = () => {
         const user = {
@@ -30,7 +41,9 @@ const Login = (props) =>{
           setError("Please fill in your credentials");
         
         } else {
+          loginUser(user , context.dispatch)
         console.log('success')
+
         }
       };
 

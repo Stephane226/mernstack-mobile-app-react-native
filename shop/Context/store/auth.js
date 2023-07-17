@@ -7,7 +7,7 @@ import authReducer from '../reducers/auth.reducer'
 import { setCurrentUserUser } from '../actions/auth.actions'
 import AuthGlobal from './auth.global'
 
-const Auth = props => {
+const Auth = (props) => {
     const [stateUser, dispatch] = useReducer(authReducer, {
         isAuthenticated: null,
         user: {}

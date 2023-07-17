@@ -25,7 +25,7 @@ function MyStack() {
                 }}
             />
              <Stack.Screen 
-                name="User Profile"
+                name="userprofile"
                 component={UserProfile}
                 options={{
                     headerShown: false
