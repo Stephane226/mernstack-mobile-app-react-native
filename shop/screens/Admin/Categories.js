@@ -6,7 +6,7 @@ import baseURL from "../../assets/common/baseUrl"
 const Categories = (props) => {
     return(
         <View>
-         <Text>PCategories Screen</Text>
+         <Text>PCategories Scr een</Text>
         </View> 
     )
 }
