@@ -96,7 +96,12 @@ const Products = (props) => {
             data={productFilter}
           
             renderItem={({ item, index }) => (
-              <ListItem {...item} />
+              <ListItem
+              
+              navigation={props.navigation}
+              index={index}
+              {...item}
+               />
             )}
             keyExtractor={(item) => item.id}
           />
