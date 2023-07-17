@@ -20,6 +20,55 @@ const ListItem = (props) => {
 
     return(
         <View>
+
+<Modal
+                animationType="fade"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    setModalVisible(false)
+                }}
+            >
+                <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <TouchableOpacity
+                            underlayColor="#E8E8E8"
+                            onPress={() => {
+                                setModalVisible(false)
+                            }}
+                            style={{ 
+                                alignSelf: "flex-end",
+                                position: "absolute",
+                                top: 5,
+                                right: 10
+                            }}
+                        >
+                            <Icon name="close" size={20} />
+                        </TouchableOpacity>
+                        <EasyButton 
+                        medium 
+                        secondary
+                        onPress={() => [
+                            props.navigation.navigate("ProductForm", { item: props}),
+                            setModalVisible(false)
+                        ]}
+                        >
+                            <Text style={styles.textStyle}>Edit</Text>
+                        </EasyButton>
+                        <EasyButton 
+                        medium 
+                        danger
+                        onPress={() => [props.delete(props._id), setModalVisible(false)]}
+                        >
+                            <Text style={styles.textStyle}>Delete</Text>
+                        </EasyButton>
+                    </View>
+                </View>
+
+            </Modal>
+
+
+            
           
             <TouchableOpacity
                 onPress={() => {
