@@ -14,7 +14,7 @@ import React ,{ useEffect,  useState }from "react";
   function Payment() {
     return(
         <View>
-          <Text> Payment screen</Text>
+          <Text>Ziraaf eft yapcan</Text>
         </View>
     )
   }

@@ -8,7 +8,8 @@ import React from 'react';
 //stacks
 import HomeNavigator from './homeNavigator'
 import CartNavigator from './CartNavigator'
-
+import UserNavigator from './UserNavigator';
+import AdminNavigator from './AdminNavigator';
 
 
 const Tab = createBottomTabNavigator()
@@ -64,7 +65,7 @@ const Main = () => {
 
             <Tab.Screen
                 name='Admin'
-                component={ HomeNavigator }
+                component={ AdminNavigator }
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Icon
@@ -81,9 +82,10 @@ const Main = () => {
             />
 
 
+
             <Tab.Screen
-               name='User'
-               component = {HomeNavigator}
+               name='User Navigator'
+               component = {UserNavigator}
                options = {{
                 tabBarIcon : ({color}) => (
                     <Icon
@@ -97,6 +99,7 @@ const Main = () => {
                }}
 
             />
+
 
         </Tab.Navigator>
 

@@ -11,6 +11,8 @@ import ProductList from "./productlist";
 import SearchedProduct from "./searchProducts";
 import Banner from "../../shared/banner";
 import Categoryfilter from './CategoryFilter'
+import axios from 'axios'
+import baseURL from '../../assets/common/baseUrl'
 
 const data = require("../../assets/data/products.json");
 const productsCategories = require("../../assets/data/categories.json");
@@ -30,14 +32,28 @@ export default function productContainer(props) {
   const [productsCtg, setProductsCtg] = useState([])
 
   useEffect(() => {
-    setProducts(data);
-    setProductsFiltered(data);
+   
     setFocus(false)
-    setCategories(productsCategories);
+   // setCategories(productsCategories);
     setActive(-1)
-    setInitialState(data)
-    setProductsCtg(data)
- 
+  
+
+    //axios fetchs products
+    axios.get(`${baseURL}products`) 
+    .then((response) =>{
+      setProducts(response.data);
+      setProductsFiltered(response.data);
+      setInitialState(response.data)
+      setProductsCtg(response.data)
+    }).catch((err) =>{console.log(err)})
+
+    //axios fetchs categories
+    axios.get(`${baseURL}categories`) 
+    .then((response) =>{
+      setCategories(response.data);
+    }).catch((err) =>{console.log(err)})
+
+
     return () => {
       setProducts([]);
       setProductsFiltered([]);
@@ -72,9 +88,10 @@ export default function productContainer(props) {
     
      : [
       setProductsCtg(
-        products.filter((i) => i.category.$oid === ctg),
+        products.filter((i) => i.category === ctg),
         setActive(true)
       ),
+      
     ];
   
 

@@ -63,14 +63,17 @@ router.get("/:id", async (req, res) => {
 //user login checks
 
 router.post("/login", async (req, res) => {
+  console.log('want to login...')
   const user = await User.findOne({ email: req.body.email });
   const secret = process.env.secret;
 
   if (!user) {
     return res.status(404).send("user not exist...");
+   
   }
 
   if (user && bcrypt.compareSync(req.body.password, user.passwordHash)) {
+    console.log('theere is a valid user')
     const token = jwt.sign(
       {
         userID: user.id,
