@@ -74,7 +74,7 @@ const Products = (props) => {
         <View style={styles.buttonContainer}>
             <Button
                 
-               title='button'
+               title='Orders'
                 onPress={() => props.navigation.navigate("Orders")}
             >
                 <Icon name="shopping-bag" size={18} color="white" />
@@ -82,7 +82,7 @@ const Products = (props) => {
             </Button>
             <Button
                 
-               title='button'
+               title='Add product'
                 onPress={() => props.navigation.navigate("ProductForm")}
             >
                 <Icon name="plus" size={18} color="white" />
@@ -90,12 +90,13 @@ const Products = (props) => {
             </Button>
             <Button
                 
-               title='button'
+               title='Categories'
                 onPress={() => props.navigation.navigate("Categories")}
             >
                 <Icon name="plus" size={18} color="white" />
                 <Text style={styles.buttonText}>Categories</Text>
             </Button>
+
         </View>
       <View>
        
