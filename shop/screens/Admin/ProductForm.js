@@ -52,20 +52,46 @@ const ProductForm = (props) => {
 
     const categoriesWrapper = ()=>{
       categories.map((c) =>{
-          return  arrayCategories.push({ label: c.name , value: c.name })
+        //  return  arrayCategories.push({ label: c.name , value: c.name })
        })
     }
-    categoriesWrapper()
+    //categoriesWrapper()
 
-    setItem(arrayCategories)
+    //setItem(arrayCategories)
+
+    //image picker
+    (async () => {
+        if (Platform.OS !== "web") {
+            const {
+                status,
+            } = await ImagePicker.requestCameraPermissionsAsync();
+            if (status !== "granted") {
+                alert("Sorry, we need camera roll permissions to make this work!")
+            }
+        }
+    })();
+    
 
    }, [])
 
 
-   const [items, setItems] = useState([
+
  
-  ]);
- 
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1
+    });
+
+    if (!result.canceled) {
+        setMainImage(result.uri);
+        setImage(result.uri);
+    }
+};
+
+
  
 
     return(
@@ -73,7 +99,7 @@ const ProductForm = (props) => {
         <FormContainer title="Add Product">
         <View style={styles.imageContainer}>
             <Image style={styles.image} source={{uri: mainImage}}/>
-            <TouchableOpacity onPress={null} style={styles.imagePicker}>
+            <TouchableOpacity onPress={pickImage()} style={styles.imagePicker}>
                 <Icon style={{ color: "white"}} name="camera"/>
             </TouchableOpacity>
         </View>
@@ -131,7 +157,7 @@ const ProductForm = (props) => {
         />
 
 <View style={{ width: "80%", alignItems: "center" }}>
-         <DropDownPicker
+   {/*<DropDownPicker
           open={open}
           value={value}
           items={item}
@@ -139,7 +165,7 @@ const ProductForm = (props) => {
           setValue={setValue}
           setItems={setItems}
 
-        />
+    /> */}
         </View>
 
 
