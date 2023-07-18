@@ -21,11 +21,25 @@ var { height, width } = Dimensions.get("window")
 
 const Products = (props) => {
 
+
+   
+
+
     const [productList, setProductList] = useState();
     const [productFilter, setProductFilter] = useState();
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState();
 
+    const deleteProduct = (id) => {
+        axios
+            .delete(`${baseURL}products/${id}`, {
+            })
+            .then((res) => {
+                const products = productFilter.filter((item) => item.id !== id)
+                setProductFilter(products)
+            })
+            .catch((error) => console.log(error));
+    }
 
     useFocusEffect(
         useCallback(
@@ -97,7 +111,7 @@ const Products = (props) => {
           
             renderItem={({ item, index }) => (
               <ListItem
-              
+              delete={deleteProduct}
               navigation={props.navigation}
               index={index}
               {...item}

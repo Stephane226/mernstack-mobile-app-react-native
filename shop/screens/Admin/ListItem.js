@@ -45,30 +45,30 @@ const ListItem = (props) => {
                         >
                             <Icon name="close" size={20} />
                         </TouchableOpacity>
-                        <EasyButton 
-                        medium 
-                        secondary
+                        <Button 
+                         
+                         title='Edit'
                         onPress={() => [
                             props.navigation.navigate("ProductForm", { item: props}),
                             setModalVisible(false)
                         ]}
                         >
-                            <Text style={styles.textStyle}>Edit</Text>
-                        </EasyButton>
-                        <EasyButton 
-                        medium 
-                        danger
+                        </Button>
+                        
+                        <Button 
+                            title='Delete'
+                        
                         onPress={() => [props.delete(props._id), setModalVisible(false)]}
                         >
-                            <Text style={styles.textStyle}>Delete</Text>
-                        </EasyButton>
+
+                        </Button>
                     </View>
                 </View>
 
             </Modal>
 
 
-            
+
           
             <TouchableOpacity
                 onPress={() => {
