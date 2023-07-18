@@ -96,7 +96,7 @@ const Products = (props) => {
                 <Icon name="plus" size={18} color="white" />
                 <Text style={styles.buttonText}>Categories</Text>
             </Button>
-            
+
         </View>
       <View>
        

@@ -17,6 +17,8 @@ import baseURL from "../../assets/common/baseUrl"
 import axios from "axios"
 import DropDownPicker from "react-native-dropdown-picker";
 import * as ImagePicker from "expo-image-picker"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import mime from "mime";
 
 const ProductForm = (props) => {
 
@@ -72,6 +74,13 @@ const ProductForm = (props) => {
     })();
     
 
+  //get jwt
+    AsyncStorage.getItem("jwt")
+    .then((res) => {
+        setToken(res)
+    })
+    .catch((error) => console.log(error))
+
    }, [])
 
 
@@ -92,7 +101,97 @@ const ProductForm = (props) => {
 };
 
 
- 
+
+const addProduct = () => {
+    if (
+        name == "" ||
+        brand == "" ||
+        price == "" ||
+        description == "" ||
+        category == "" ||
+        countInStock == ""
+    ) {
+        setError("Please fill in the form correctly")
+    }
+
+    let formData = new FormData();
+
+    const newImageUri = "file:///" + image.split("file:/").join("");
+
+    formData.append("image", {
+        uri: newImageUri,
+        type: mime.getType(newImageUri),
+        name: newImageUri.split("/").pop()
+    });
+    formData.append("name", name);
+    formData.append("brand", brand);
+    formData.append("price", price);
+    formData.append("description", description);
+    formData.append("category", category);
+    formData.append("countInStock", countInStock);
+    formData.append("richDescription", richDescription);
+    formData.append("rating", rating);
+    formData.append("numReviews", numReviews);
+    formData.append("isFeatured", isFeatured);
+
+    const config = {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    if(item !== null) {
+        axios
+        .put(`${baseURL}products/${item.id}`, formData, config)
+        .then((res) => {
+            if(res.status == 200 || res.status == 201) {
+                Toast.show({
+                    topOffset: 60,
+                    type: "success",
+                    text1: "Product successfuly updated",
+                    text2: ""
+                });
+                setTimeout(() => {
+                    props.navigation.navigate("Products");
+                }, 500)
+            }
+        })
+        .catch((error) => {
+            Toast.show({
+                topOffset: 60,
+                    type: "error",
+                    text1: "Something went wrong",
+                    text2: "Please try again"
+            })
+        })
+    } else {
+        axios
+        .post(`${baseURL}products`, formData, config)
+        .then((res) => {
+            if(res.status == 200 || res.status == 201) {
+                Toast.show({
+                    topOffset: 60,
+                    type: "success",
+                    text1: "New Product added",
+                    text2: ""
+                });
+                setTimeout(() => {
+                    props.navigation.navigate("Products");
+                }, 500)
+            }
+        })
+        .catch((error) => {
+            Toast.show({
+                topOffset: 60,
+                    type: "error",
+                    text1: "Something went wrong",
+                    text2: "Please try again"
+            })
+        })
+    } 
+}
+
 
     return(
 
