@@ -127,10 +127,10 @@ const addProduct = () => {
     formData.append("brand", brand);
     formData.append("price", price);
     formData.append("description", description);
-    formData.append("category", category);
+    formData.append("category", '649c9b3a03c12f6b52445c1a');
     formData.append("countInStock", countInStock);
     formData.append("richDescription", richDescription);
-    formData.append("rating", rating);
+    formData.append("rating", 0);
     formData.append("numReviews", numReviews);
     formData.append("isFeatured", isFeatured);
 
@@ -164,6 +164,7 @@ const addProduct = () => {
                     text1: "Something went wrong",
                     text2: "Please try again"
             })
+            console.log(error)
         })
     } else {
         axios
@@ -188,7 +189,12 @@ const addProduct = () => {
                     text1: "Something went wrong",
                     text2: "Please try again"
             })
+
+
+            console.log(error)
         })
+
+        
     } 
 }
 
@@ -198,7 +204,7 @@ const addProduct = () => {
         <FormContainer title="Add Product">
         <View style={styles.imageContainer}>
             <Image style={styles.image} source={{uri: mainImage}}/>
-            <TouchableOpacity onPress={pickImage()} style={styles.imagePicker}>
+            <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
                 <Icon style={{ color: "white"}} name="camera"/>
             </TouchableOpacity>
         </View>
